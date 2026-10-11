@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CanSat Ground Control Station</title>
+
+    <link rel="stylesheet" href="aryan.css">
+    <link rel="stylesheet" href="aryan.js">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         TOP CONTROL BAR
+    =========================================== -->
+
+    <header>
+
+        <h1>🚀 CanSat Ground Control Station</h1>
+
+        <div class="controls">
+
+            <button onclick="startTelemetry()">
+                START TELEMETRY
+            </button>
+
+            <button onclick="stopTelemetry()">
+                STOP TELEMETRY
+            </button>
+
+            <button onclick="exportCSV()">
+                EXPORT CSV
+            </button>
+
+            <button onclick="resetPackets()">
+                RESET PACKETS
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- ==========================================
+         DASHBOARD
+    =========================================== -->
+
+    <main class="dashboard">
+
+        <!-- ======================
+             TELEMETRY PANEL
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Telemetry Monitoring
+            </h2>
+
+            <div
+                id="telemetryCards"
+                class="telemetry-grid">
+            </div>
+
+        </section>
+
+        <!-- ======================
+             MISSION CONTROL
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Mission Control
+            </h2>
+
+            <div class="mission-controls">
+
+                <button
+                    class="btn-primary"
+                    onclick="manualSeparation()">
+
+                    Manual Payload Separation
+
+                </button>
+
+                <button
+                    class="btn-warning"
+                    onclick="deployParachute()">
+
+                    Emergency Parachute Deployment
+
+                </button>
+
+                <button
+                    class="btn-danger"
+                    onclick="redundantActivation()">
+
+                    Redundant Activation
+
+                </button>
+
+            </div>
+
+            <div
+                id="missionStatus"
+                class="status-box">
+
+                System Ready
+
+            </div>
+
+        </section>
+
+        <!-- ======================
+             ERROR CODE PANEL
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Error Monitoring
+            </h2>
+
+            <div class="error-panel">
+
+                <div class="error-digit">
+                    <span id="errorCode">
+                        0000
+                    </span>
+                </div>
+
+            </div>
+
+            <br>
+
+            <p>
+                1 → Descent Fault
+            </p>
+
+            <p>
+                2 → GPS Failure
+            </p>
+
+            <p>
+                3 → Separation Failure
+            </p>
+
+            <p>
+                4 → Emergency Parachute
+            </p>
+
+        </section>
+
+        <!-- ======================
+             ALTITUDE GRAPH
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Altitude Telemetry
+            </h2>
+
+            <div class="chart-container">
+
+                <canvas
+                    id="altitudeChart">
+                </canvas>
+
+            </div>
+
+        </section>
+
+        <!-- ======================
+             GPS MAP
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                GPS Tracking System
+            </h2>
+
+            <div id="map"></div>
+
+        </section>
+
+        <!-- ======================
+             ORIENTATION
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Orientation Visualization
+            </h2>
+
+            <div id="orientation"></div>
+ 
+        </section>
+
+        <!-- ======================
+             VIDEO STREAM
+        ======================= -->
+
+        <section class="panel video-panel">
+
+            <h2 class="panel-title">
+                Live Video Stream
+            </h2>
+
+            <video
+                id="videoFeed"
+                autoplay
+                playsinline>
+            </video>
+
+            <br><br>
+
+            <button
+                class="btn-primary"
+                onclick="startCamera()">
+
+                Start Camera
+
+            </button>
+
+        </section>
+
+        <!-- ======================
+             MISSION LOG
+        ======================= -->
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Mission Log
+            </h2>
+
+            <div
+                id="missionLog"
+                class="log-window">
+
+                <div class="log-entry">
+                    Awaiting telemetry...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <footer
+        style="
+        text-align:center;
+        padding:15px;
+        color:#8bbcd9;">
+
+        CanSat Ground Control Software
+        |
+        Aerospace Telemetry Dashboard
+        |
+        Chart.js + Leaflet.js + Three.js
+
+    </footer>
+
+    <!-- APP SCRIPT -->
+    <script src="aryan.js"></script>
+
+</body>
+
+</html>
